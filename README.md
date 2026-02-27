@@ -49,3 +49,26 @@ CommandLine="*EncodedCommand*"# ot-ics-soc-detection-lab
 index=wineventlog EventCode=3
 | stats count by Image, DestinationIp, DestinationPort
 | sort - count
+
+
+Commit it.
+
+---
+
+## 3) Fill each folder (step-by-step)
+
+### A) `architecture/README.md`
+Create this file and paste:
+
+```markdown
+# Architecture
+
+## Network Segmentation
+Document VLANs / subnets and why segmentation matters (reduce blast radius, easier troubleshooting).
+
+## Data Flow
+Sysmon → Windows Event Log → Splunk Forwarder → Splunk Index → Detections/Dashboards
+
+## Diagrams to Add
+- network_topology.png
+- data_flow.png
