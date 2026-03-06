@@ -4,11 +4,11 @@ This directory contains Splunk detection rules used in the SOC detection lab.
 
 Each detection includes:
 
-• Detection objective  
-• SPL query  
-• MITRE ATT&CK mapping  
-• Investigation guidance  
-• Tuning considerations  
+- Detection objective
+- SPL query
+- MITRE ATT&CK mapping
+- Investigation guidance
+- Tuning considerations
 
 ---
 
@@ -37,24 +37,13 @@ Each detection follows a structured workflow:
 
 ## Detection Lifecycle
 
----
-
-## Tuning Notes
-
-Detection rules must be tuned to reduce false positives.
-
-Common tuning strategies include:
-
-• filtering known administrative scripts  
-• excluding known system processes  
-• baselining normal network activity  
-
----
-
-## Related Components
-
-These detections rely on telemetry from:
-
-• Sysmon endpoint logs  
-• Windows Event Logs  
-• Splunk SIEM
+```text
+Telemetry
+↓
+Detection Rule
+↓
+Alert
+↓
+SOC Investigation
+↓
+Incident Documentation
