@@ -40,3 +40,4 @@ To reduce false positives:
 • Exclude known administrative scripts  
 • Exclude automation accounts  
 • Baseline normal PowerShell usage within the environment
+• Monitor for unusual encoded command usage patterns
