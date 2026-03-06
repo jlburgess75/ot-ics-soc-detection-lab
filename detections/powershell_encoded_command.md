@@ -1,23 +1,3 @@
-# Detection: PowerShell Encoded Command Execution
-
-## Purpose
-
-Detect attackers executing encoded PowerShell commands to hide malicious activity.
-
-## Risk
-
-Encoded PowerShell is commonly used for obfuscation, malware delivery, downloader activity, and post-exploitation.
-
-## Data Source
-
-Sysmon Event ID 1 – Process Creation
----
-
-```markdown
-## SPL Query
-
-```spl
-index=sysmon EventCode=1 Image="*powershell.exe*" CommandLine="*encoded*"
 ## MITRE ATT&CK
 
 T1059.001 – PowerShell
@@ -39,7 +19,7 @@ T1059.001 – PowerShell
 
 To reduce false positives:
 
-• Exclude known administrative scripts  
-• Exclude automation accounts  
-• Baseline normal PowerShell usage within the environment
-• Monitor for unusual encoded command usage patterns
+- Exclude known administrative scripts
+- Exclude approved automation accounts
+- Baseline normal PowerShell activity in the environment
+- Monitor for unusual encoded command usage patterns
