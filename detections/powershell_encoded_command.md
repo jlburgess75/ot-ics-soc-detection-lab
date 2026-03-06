@@ -11,7 +11,9 @@ Encoded PowerShell is commonly used for obfuscation, malware delivery, downloade
 ## Data Source
 
 Sysmon Event ID 1 – Process Creation
+---
 
+```markdown
 ## SPL Query
 
 ```spl
