@@ -1,74 +1,103 @@
-# OT / ICS SOC Detection Lab
+# SOC Detection Lab – Splunk + Sysmon + Active Directory
 
-Hybrid IT/OT detection lab that simulates an enterprise Active Directory environment with Sysmon-enhanced endpoint telemetry forwarded into Splunk SIEM for MITRE ATT&CK–mapped detections.
+Author: Jerald L. Burgess
 
-## 🎯 Objective
-Build a realistic SOC-ready lab that demonstrates:
-- Endpoint telemetry engineering (Sysmon)
-- Centralized log ingestion (Splunk)
-- Detection engineering and tuning
-- MITRE ATT&CK mapping (Enterprise + OT-relevant thinking)
+This project simulates a **Security Operations Center (SOC) detection environment** designed to demonstrate enterprise security monitoring, detection engineering, and incident investigation workflows.
 
-## 🏗️ Lab Architecture (High Level)
-### Components
-- **DC01** – Windows Server (Domain Controller)
-- **Windows Workstation VM** – User endpoint
-- **Sysmon** – High-fidelity endpoint telemetry
-- **Splunk Enterprise** – SIEM for indexing/correlation
-- **Splunk Universal Forwarder** – Log shipping
-
-### Data Flow
-1. Sysmon logs to Windows Event Log (Sysmon/Operational)
-2. Splunk Universal Forwarder collects Sysmon + Security logs
-3. Splunk indexes events
-4. SPL detections generate alerts and dashboards
-
-## 🔍 Telemetry: What Sysmon Captures
-Focused Event IDs:
-- **Event ID 1** – Process Creation (command line, parent process, hashes)
-- **Event ID 3** – Network Connections (per process)
-- **Event ID 13** – Registry Value Set (persistence)
-- **Event ID 7** – DLL Load (injection visibility)
-- **Event ID 2** – File creation time changes (timestomping)
-
-## 🧠 Detection Use Cases (MITRE ATT&CK Mapped)
-
-| Use Case | What It Detects | Sysmon Event | MITRE Technique |
-|---|---|---:|---|
-| Encoded PowerShell | Suspicious PowerShell execution patterns | 1 | T1059 |
-| Suspicious Outbound Traffic | Potential C2 / beaconing | 3 | T1071 |
-| Registry Persistence | Run key / persistence modifications | 13 | T1547 |
-| Injection Indicators | Unusual DLL loads | 7 | T1055 |
-
-## 🔎 Sample SPL Queries
-
-### Encoded PowerShell
-```spl
-index=wineventlog EventCode=1
-CommandLine="*EncodedCommand*"# ot-ics-soc-detection-lab
-index=wineventlog EventCode=3
-| stats count by Image, DestinationIp, DestinationPort
-| sort - count
-
-
-Commit it.
+The lab replicates real-world security monitoring scenarios used in enterprise environments and industrial networks.
 
 ---
 
-## 3) Fill each folder (step-by-step)
+## Technologies Used
 
-### A) `architecture/README.md`
-Create this file and paste:
+• Splunk Enterprise SIEM  
+• Windows Event Logs  
+• Sysmon Endpoint Telemetry  
+• Active Directory Domain Environment  
+• Windows 10 Endpoint  
+• Splunk Universal Forwarder  
 
-```markdown
-# Architecture
+---
 
-## Network Segmentation
-Document VLANs / subnets and why segmentation matters (reduce blast radius, easier troubleshooting).
+## Lab Architecture
 
-## Data Flow
-Sysmon → Windows Event Log → Splunk Forwarder → Splunk Index → Detections/Dashboards
+Environment components:
 
-## Diagrams to Add
-- network_topology.png
-- data_flow.png
+| System | Role |
+|------|------|
+| Splunk Server | Security Information and Event Management |
+| DC01 | Active Directory Domain Controller |
+| WIN10-CL1 | Windows Endpoint Workstation |
+| Sysmon | Endpoint Telemetry Collection |
+| Splunk Universal Forwarder | Log Forwarding Agent |
+
+### Data Flow
+
+---
+
+## Detection Engineering Scenarios
+
+This lab demonstrates detection engineering use cases including:
+
+• Privileged logon detection  
+• Suspicious PowerShell execution  
+• Lateral movement detection  
+• Credential dumping indicators  
+• Suspicious process activity  
+
+---
+
+## Incident Investigations
+
+Each detection scenario includes a complete SOC investigation.
+
+Example:
+
+### IR-001 – Privileged Logon Investigation
+
+Investigation workflow:
+
+1. Detect privileged logon event
+2. Correlate authentication logs
+3. Review process execution
+4. Investigate network connections
+5. Document findings
+
+Evidence includes:
+
+• Splunk search queries  
+• timeline reconstruction  
+• screenshots of events  
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Detection | ATT&CK Technique |
+|---|---|
+| Privileged Logon | T1078 Valid Accounts |
+| Suspicious PowerShell | T1059 Command Execution |
+| Lateral Movement (RDP) | T1021 Remote Services |
+| Credential Dumping | T1003 Credential Dumping |
+
+---
+
+## Future Enhancements
+
+Planned improvements:
+
+• OT device monitoring (Modbus)  
+• firewall log integration  
+• additional attack simulations  
+• automated detection alerts  
+
+---
+
+## Skills Demonstrated
+
+• SIEM deployment and log ingestion  
+• Windows log analysis  
+• Endpoint telemetry monitoring  
+• Detection engineering  
+• SOC incident investigation  
+• Security documentation
