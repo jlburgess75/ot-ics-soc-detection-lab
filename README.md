@@ -1,103 +1,55 @@
-# SOC Detection Lab – Splunk + Sysmon + Active Directory
+# OT / ICS SOC Detection Lab
 
-Author: Jerald L. Burgess
+This project demonstrates a simulated industrial control system (ICS) security environment built using virtualization and open-source security tools.
 
-This project simulates a **Security Operations Center (SOC) detection environment** designed to demonstrate enterprise security monitoring, detection engineering, and incident investigation workflows.
+The lab follows the Purdue Model architecture and includes enterprise IT systems, network segmentation, and industrial control systems.
 
-The lab replicates real-world security monitoring scenarios used in enterprise environments and industrial networks.
+## Lab Components
 
----
+• VMware Workstation  
+• Windows Server 2022 Domain Controller (DC01)  
+• Windows 10 Workstation  
+• pfSense Firewall  
+• OpenPLC Industrial Controller  
+• Kali Linux Attacker Machine  
+• Splunk SIEM  
 
-## Technologies Used
+## Architecture
 
-• Splunk Enterprise SIEM  
-• Windows Event Logs  
-• Sysmon Endpoint Telemetry  
-• Active Directory Domain Environment  
-• Windows 10 Endpoint  
-• Splunk Universal Forwarder  
-
----
-
-## Lab Architecture
-
-Environment components:
-
-| System | Role |
-|------|------|
-| Splunk Server | Security Information and Event Management |
-| DC01 | Active Directory Domain Controller |
-| WIN10-CL1 | Windows Endpoint Workstation |
-| Sysmon | Endpoint Telemetry Collection |
-| Splunk Universal Forwarder | Log Forwarding Agent |
-
-### Data Flow
-
----
-
-## Detection Engineering Scenarios
-
-This lab demonstrates detection engineering use cases including:
-
-• Privileged logon detection  
-• Suspicious PowerShell execution  
-• Lateral movement detection  
-• Credential dumping indicators  
-• Suspicious process activity  
-
----
-
-## Incident Investigations
-
-Each detection scenario includes a complete SOC investigation.
-
-Example:
-
-### IR-001 – Privileged Logon Investigation
-
-Investigation workflow:
-
-1. Detect privileged logon event
-2. Correlate authentication logs
-3. Review process execution
-4. Investigate network connections
-5. Document findings
-
-Evidence includes:
-
-• Splunk search queries  
-• timeline reconstruction  
-• screenshots of events  
-
----
-
-## MITRE ATT&CK Mapping
-
-| Detection | ATT&CK Technique |
-|---|---|
-| Privileged Logon | T1078 Valid Accounts |
-| Suspicious PowerShell | T1059 Command Execution |
-| Lateral Movement (RDP) | T1021 Remote Services |
-| Credential Dumping | T1003 Credential Dumping |
-
----
-
-## Future Enhancements
-
-Planned improvements:
-
-• OT device monitoring (Modbus)  
-• firewall log integration  
-• additional attack simulations  
-• automated detection alerts  
-
----
+Enterprise Network
+│
+├── DC01 (Active Directory)
+├── Windows 10 workstation
+└── Splunk SIEM
+        │
+        │
+     pfSense Firewall
+        │
+Industrial Network
+│
+└── OpenPLC (PLC)
+        │
+    Modbus devices
 
 ## Skills Demonstrated
 
-• SIEM deployment and log ingestion  
-• Windows log analysis  
-• Endpoint telemetry monitoring  
-• Detection engineering  
-• SOC incident investigation  
-• Security documentation
+• Active Directory administration  
+• Network segmentation using pfSense  
+• OT / ICS architecture based on the Purdue Model  
+• Splunk SIEM log monitoring  
+• Attack simulation using Kali Linux  
+• Industrial protocol analysis (Modbus)
+
+## Attack Simulations
+
+1. Active Directory brute-force attack  
+2. Lateral movement using compromised credentials  
+3. PLC command injection via Modbus  
+
+## Detection Engineering
+
+Splunk queries are used to detect:
+
+• abnormal login attempts  
+• unusual Modbus commands  
+• lateral movement across hosts
